@@ -13,24 +13,22 @@
 using namespace std;
 
 class Shader {
-public:
-	enum mode { MODE_DEFAULT };
-
 private:
 	class Default {
 	public:
 		static GLuint Projection;
 		static GLuint ModelView;
-		static GLuint lightAmbient;
-		static GLuint lightVector;
-		static GLuint vPos;
-		static GLuint vTex;
-		static GLuint vCol;
-		static GLuint vNorm;
+	};
+
+	class FramePass {
+	};
+
+	class Wire {
 	};
 
 	static GLuint shdDefault;
-	static enum mode shdMode;
+	static GLuint shdFramePass;
+	static GLuint shdWire;
 
 	static mat4 modelViewCurrent;
 	static stack<mat4> modelViewStack;
@@ -38,22 +36,19 @@ private:
 public:
 	static void init();
 
-	static void useDefault();
+	static void useDefault() { glUseProgram(shdDefault); };
+	static void useFramePass() { glUseProgram(shdFramePass); };
+	static void useWire() { glUseProgram(shdWire); };
 
-	static void translate(vec3 pos);
-	static void rotateX(float a);
-	static void rotateY(float a);
-	static void rotateZ(float a);
-	static void scale(vec3 sv);
+	static void translate(vec3 pos) { modelViewCurrent *= Matrix::Translate(pos); };
+	static void rotateX(float a) { modelViewCurrent *= Matrix::RotateX(a); };
+	static void rotateY(float a) { modelViewCurrent *= Matrix::RotateY(a); };
+	static void rotateZ(float a) { modelViewCurrent *= Matrix::RotateZ(a); };
+	static void scale(vec3 sv) { modelViewCurrent *= Matrix::Scale(sv); };
 
 	static void pop();
 	static void push();
 
-	static enum mode getMode();
-	static GLuint getProjection();
-	static GLuint getModelView();
-	static GLuint getvPos();
-	static GLuint getvTex();
-	static GLuint getvCol();
-	static GLuint getvNorm();
+	static GLuint getProjection() { return Default::Projection; };
+	static GLuint getModelView() { return Default::ModelView; };
 };

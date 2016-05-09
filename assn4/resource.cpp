@@ -34,10 +34,10 @@ Model Resource::hill;
 
 Model Resource::player;
 
-Model Resource::car(Model::TYPE_LINE);
-Model Resource::bus(Model::TYPE_LINE);
-Model Resource::wheel(Model::TYPE_LINE);
-Model Resource::tree(Model::TYPE_LINE);
+Model Resource::car;
+Model Resource::bus;
+Model Resource::wheel;
+Model Resource::tree;
 Model Resource::tunnel;
 Model Resource::drain;
 
@@ -73,6 +73,7 @@ void Resource::Tex::init() {
 void Resource::init() {
 	Tex::init();
 
+	/*
 	canonical.addPoint(vec3(-1.0, -1.0, 0.0), vec2(0.0, 0.0), vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 1.0));
 	canonical.addPoint(vec3(-1.0, 1.0, 0.0), vec2(0.0, 1.0), vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 1.0));
 	canonical.addPoint(vec3(1.0, -1.0, 0.0), vec2(1.0, 0.0), vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 1.0));
@@ -80,38 +81,43 @@ void Resource::init() {
 	canonical.addPoint(vec3(1.0, -1.0, 0.0), vec2(1.0, 0.0), vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 1.0));
 	canonical.addPoint(vec3(1.0, 1.0, 0.0), vec2(1.0, 1.0), vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 1.0));
 	canonical.generate();
+	*/
 
 	const float wlimit = Game::getWidthLimit();
 	const float xlimit = Game::getGrid() * 3.5;
 	const float grid = Game::getGrid();
 	const float thickness = 3.0;
 
+	/*
 	temp.addBox(vec3(-30.0, -30.0, 0.0), vec3(0.0, 30.0, 30.0), Color::white);
 	temp.addBox(vec3(0.0, -30.0, 0.0), vec3(30.0, 30.0, 30.0), Color::black);
 	temp.addBox(vec3(-30.0, -30.0, 30.0), vec3(0.0, 30.0, 60.0), Color::black);
 	temp.addBox(vec3(0.0, -30.0, 30.0), vec3(30.0, 30.0, 60.0), Color::white);
 	temp.generate();
+	*/
 
+	/*
 	grass.addBox(vec3(-xlimit, -grid / 2.0, -grid), vec3(xlimit, grid / 2.0, thickness), Color::grass);
 	grass.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(-xlimit, grid / 2.0, 2.0*thickness), Color::darkgrass);
 	grass.addBox(vec3(xlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 2.0*thickness), Color::darkgrass);
 	grass.generate();
+	*/
 
-	roadLane.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 0.0), Color::gray);
-	roadLane.generate();
+	//roadLane.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 0.0), Color::gray);
+	//roadLane.generate();
 
-	roadLineYellow.addBox(vec3(-wlimit, -3.0, 0.0), vec3(wlimit, 3.0, thickness), Color::yellow);
-	roadLineYellow.generate();
+	//roadLineYellow.addBox(vec3(-wlimit, -3.0, 0.0), vec3(wlimit, 3.0, thickness), Color::yellow);
+	//roadLineYellow.generate();
 
 	const float w = 40.0;
 	const float wsep = 60.0;
 	for (float dx = wsep / 2.0; dx < wlimit; dx += w + wsep) {
-		roadLineWhite.addBox(
-			vec3(dx, -3.0, 0.0), vec3(dx + w, 3.0, thickness), Color::white);
-		roadLineWhite.addBox(
-			vec3(-dx - w, -3.0, 0.0), vec3(-dx, 3.0, thickness), Color::white);
+		//roadLineWhite.addBox(
+		//	vec3(dx, -3.0, 0.0), vec3(dx + w, 3.0, thickness), Color::white);
+		//roadLineWhite.addBox(
+		//	vec3(-dx - w, -3.0, 0.0), vec3(-dx, 3.0, thickness), Color::white);
 	}
-	roadLineWhite.generate();
+	//roadLineWhite.generate();
 
 	water.load("water.obj");
 	water.generate();

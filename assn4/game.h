@@ -8,6 +8,7 @@
 #include <GL/glew.h>
 #include "player.h"
 #include "deco.h"
+#include "framebuffer.h"
 
 class Game {
 private:
@@ -18,6 +19,7 @@ private:
 	static float grid;
 	static float widthLimit;
 	static int frameInterval;
+	static Framebuffer fb;
 
 public:
 	static void init();

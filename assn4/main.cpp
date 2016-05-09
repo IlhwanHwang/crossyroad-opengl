@@ -31,7 +31,7 @@ void main(int argc, char **argv)
 	glutInitContextVersion(3, 2);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 
-	glutCreateWindow("BetterCarryingEachOther Assn3");
+	glutCreateWindow("BetterCarryingEachOther Assn4");
 
 	glewExperimental = GL_TRUE;
 	glewInit();

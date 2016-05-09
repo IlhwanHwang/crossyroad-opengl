@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -90,6 +90,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,8 +146,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="debug.cpp" />
     <ClCompile Include="deco.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="framebuffer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="generator.cpp" />
     <ClCompile Include="InitShader.cpp" />
@@ -165,8 +168,10 @@
     <ClCompile Include="view.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="debug.h" />
     <ClInclude Include="deco.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="framebuffer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="generator.h" />
     <ClInclude Include="InitShader.h" />
@@ -239,8 +244,13 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
-    <None Include="f_default.glsl" />
-    <None Include="v_default.glsl" />
+    <None Include="deferred_f.glsl" />
+    <None Include="framepass_f.glsl" />
+    <None Include="framepass_v.glsl" />
+    <None Include="wire_f.glsl" />
+    <None Include="wire_g.glsl" />
+    <None Include="deferred_v.glsl" />
+    <None Include="wire_v.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

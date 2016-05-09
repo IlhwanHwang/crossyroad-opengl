@@ -19,6 +19,7 @@
 #include "resource.h"
 #include "null.h"
 
+
 using namespace std;
 
 Object* Game::pool = nullptr;
@@ -28,6 +29,9 @@ Deco* Game::hillR = nullptr;
 float Game::grid = 64.0;
 float Game::widthLimit = Game::grid * 6.0;
 int Game::frameInterval = 16;
+Framebuffer Game::fb((int)View::getWidth(), (int)View::getHeight());
+
+GLuint can;
 
 void Game::init() {
 	glEnable(GL_DEPTH_TEST);
@@ -35,6 +39,8 @@ void Game::init() {
 
 	srand(time(NULL));
 	setup();
+
+	fb.generate();
 }
 
 void Game::setup() {
@@ -72,15 +78,30 @@ void Game::reshape(int w, int h) {
 }
 
 void Game::draw() {
+	fb.bind();
+
+	Shader::useWire();
 	glClearDepth(1.0);
-	glClearColor(Color::sky.x, Color::sky.y, Color::sky.z, 1.0);
+	glClearColor(0.5, 0.75, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	Shader::useDefault();
 	glActiveTexture(GL_TEXTURE0);
 	pool->draw();
 	player->draw();
 	
+	fb.unbind();
+
+	Shader::useFramePass();
+	glClearDepth(1.0);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glActiveTexture(GL_TEXTURE0);
+	fb.bindDiffuse();
+	Model::drawFramePassCanonical();
+
+	Shader::useWire();
+
 	glutSwapBuffers();
 }
 

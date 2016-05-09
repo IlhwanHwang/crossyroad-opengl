@@ -75,6 +75,12 @@
     <ClCompile Include="utility.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="framebuffer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="deco.h">
@@ -132,6 +138,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="view.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="framebuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -215,10 +227,25 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
-    <None Include="f_default.glsl">
+    <None Include="deferred_v.glsl">
       <Filter>셰이더 파일</Filter>
     </None>
-    <None Include="v_default.glsl">
+    <None Include="deferred_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="framepass_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="framepass_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="wire_g.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="wire_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="wire_v.glsl">
       <Filter>셰이더 파일</Filter>
     </None>
   </ItemGroup>
