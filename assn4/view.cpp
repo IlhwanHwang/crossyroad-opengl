@@ -15,6 +15,8 @@
 #include "shader.h"
 #include "key.h"
 
+#include "debug.h"
+
 float View::x = 0.0;
 float View::y = 0.0;
 float View::width = 768.0;
@@ -72,7 +74,6 @@ void View::update() {
 
 		Project *= Matrix::Perspective(45.0, aspect, znear, zfar);
 		Project *= Matrix::LookAt(eye, at, up);
-		glUniformMatrix4fv(Shader::getProjection(), 1, GL_TRUE, Project);
 		break;
 
 	case VIEW_BACK:
@@ -83,15 +84,19 @@ void View::update() {
 
 		Project *= Matrix::Perspective(45.0, aspect, znear, zfar);
 		Project *= Matrix::LookAt(eye, at, up);
-		glUniformMatrix4fv(Shader::getProjection(), 1, GL_TRUE, Project);
 		break;
 
 	case VIEW_BIRD:
 		Project *= Matrix::Ortho(-height / 3.0 * aspect, height / 3.0 * aspect, -height / 3.0, height / 3.0, -height, height);
-		Project *= Matrix::LookAt(vec4(0.0, y, 0.0, 1.0), vec4(0.0, y, -1.0, 1.0), vec4(0.0, 1.0, 0.0, 0.0));
-		glUniformMatrix4fv(Shader::getProjection(), 1, GL_TRUE, Project);
+		eye = vec4(0.0, y, 0.0, 1.0);
+		at = vec4(0.0, y, -1.0, 1.0);
+		up = vec4(0.0, 1.0, 0.0, 0.0);
+		Project *= Matrix::LookAt(eye, at, up);
 		break;
 	}
+
+	Shader::getPhysicalShader().setProjection(Project);
+	Shader::getPhysicalShader().setEye(eye);
 }
 
 void View::setViewDir(float dir) {

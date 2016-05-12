@@ -37,6 +37,9 @@ public:
 
 	Model();
 
+	void addBox(vec3 pos1, vec3 pos2);
+	void addPoint(vec3 pos, vec2 tex, vec3 norm);
+
 	void load(const char* fn);
 	void load(const char* fn, const char* group);
 	void generate();

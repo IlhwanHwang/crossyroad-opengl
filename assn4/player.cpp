@@ -47,79 +47,87 @@ void Player::draw() const {
 
 	Resource::Tex::goraniWhole.bind();
 
-	Shader::translate(vec3(xx, yy, pos.z + 10.0 * sFac));
-	Shader::rotateZ(adir + 180.0);
-	Shader::scale(lerpv3(vec3(1.0, 1.0, 1.0), vec3(1.0, 2.0, 0.3), flatten));
-	Shader::translate(vec3(0.0, 0.0, 28.0));
-	Shader::scale(0.7);
-	Shader::rotateY(10.0 * sinf(piPhase * 2.0));
 	Shader::push();
-	Resource::goraniTorso.draw();
+		Shader::translate(vec3(xx, yy, pos.z + 10.0 * sFac));
+		Shader::rotateZ(adir + 180.0);
+		Shader::scale(lerpv3(vec3(1.0, 1.0, 1.0), vec3(1.0, 2.0, 0.3), flatten));
+		Shader::translate(vec3(0.0, 0.0, 28.0));
+		Shader::scale(0.7);
+		Shader::rotateY(10.0 * sinf(piPhase * 2.0));
+		Shader::apply();
+		Resource::goraniTorso.draw();
 
-	Shader::translate(vec3(16.0, bodyWidth, -4.0));
-	Shader::rotateY(-20.0 * sFac);
-	Shader::push();
-	Resource::goraniLegBackTop.draw();
+		Shader::push();
+			Shader::translate(vec3(16.0, bodyWidth, -4.0));
+			Shader::rotateY(-20.0 * sFac);
+			Shader::apply();
+			Resource::goraniLegBackTop.draw();
 
-	Shader::translate(vec3(4.0, 0.0, -12.0));
-	Shader::rotateY(-10.0 * sFac);
-	Shader::push();
-	Resource::goraniLegBackBottom.draw();
+			Shader::push();
+				Shader::translate(vec3(4.0, 0.0, -12.0));
+				Shader::rotateY(-10.0 * sFac);
+				Shader::apply();
+				Resource::goraniLegBackBottom.draw();
+			Shader::pop();
+		Shader::pop();
+		Shader::push();
+			Shader::translate(vec3(16.0, -bodyWidth, -4.0));
+			Shader::rotateY(-20.0 * sFac);
+			Shader::apply();
+			Resource::goraniLegBackTop.draw();
 
-	Shader::pop();
-	Shader::pop();
+			Shader::push();
+				Shader::translate(vec3(4.0, 0.0, -12.0));
+				Shader::rotateY(-10.0 * sFac);
+				Shader::apply();
+				Resource::goraniLegBackBottom.draw();
+			Shader::pop();
+		Shader::pop();
 
-	Shader::translate(vec3(16.0, -bodyWidth, -4.0));
-	Shader::rotateY(-20.0 * sFac);
-	Shader::push();
-	Resource::goraniLegBackTop.draw();
+		Shader::push();
+			Shader::translate(vec3(-16.0, bodyWidth, -4.0));
+			Shader::rotateY(70.0 * sFac);
+			Shader::apply();
+			Resource::goraniLegFrontTop.draw();
 
-	Shader::translate(vec3(4.0, 0.0, -12.0));
-	Shader::rotateY(-10.0 * sFac);
-	Shader::push();
-	Resource::goraniLegBackBottom.draw();
+			Shader::push();
+				Shader::translate(vec3(0.0, 0.0, -12.0));
+				Shader::rotateY(-90.0 * sFac);
+				Shader::apply();
+				Resource::goraniLegFrontBottom.draw();
 
-	Shader::pop();
-	Shader::pop();
+			Shader::pop();
+		Shader::pop();
 
-	Shader::translate(vec3(-16.0, bodyWidth, -4.0));
-	Shader::rotateY(70.0 * sFac);
-	Shader::push();
-	Resource::goraniLegFrontTop.draw();
+		Shader::push();
+			Shader::translate(vec3(-16.0, -bodyWidth, -4.0));
+			Shader::rotateY(70.0 * sFac);
+			Shader::apply();
+			Resource::goraniLegFrontTop.draw();
 
-	Shader::translate(vec3(0.0, 0.0, -12.0));
-	Shader::rotateY(-90.0 * sFac);
-	Shader::push();
-	Resource::goraniLegFrontBottom.draw();
+			Shader::push();
+				Shader::translate(vec3(0.0, 0.0, -12.0));
+				Shader::rotateY(-90.0 * sFac);
+				Shader::apply();
+				Resource::goraniLegFrontBottom.draw();
 
-	Shader::pop();
-	Shader::pop();
+			Shader::pop();
+		Shader::pop();
 
-	Shader::translate(vec3(-16.0, -bodyWidth, -4.0));
-	Shader::rotateY(70.0 * sFac);
-	Shader::push();
-	Resource::goraniLegFrontTop.draw();
+		Shader::push();
+			Shader::translate(vec3(-16.0, 0.0, 16.0));
+			Shader::apply();
+			Resource::goraniNeck.draw();
 
-	Shader::translate(vec3(0.0, 0.0, -12.0));
-	Shader::rotateY(-90.0 * sFac);
-	Shader::push();
-	Resource::goraniLegFrontBottom.draw();
+			Shader::push();
+				Shader::translate(vec3(0.0, 0.0, 12.0));
+				Shader::apply();
+				Resource::goraniHead.draw();
 
-	Shader::pop();
-	Shader::pop();
+			Shader::pop();
+		Shader::pop();
 
-	Shader::translate(vec3(-16.0, 0.0, 16.0));
-	Shader::push();
-	Resource::goraniNeck.draw();
-
-	Shader::translate(vec3(0.0, 0.0, 12.0));
-	Shader::push();
-	Resource::goraniHead.draw();
-
-	Shader::pop();
-	Shader::pop();
-
-	Object::draw();
+		Object::draw();
 	Shader::pop();
 }
 

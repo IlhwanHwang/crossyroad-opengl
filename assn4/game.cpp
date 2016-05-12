@@ -18,7 +18,9 @@
 #include "shader.h"
 #include "resource.h"
 #include "null.h"
+#include "key.h"
 
+#include "debug.h"
 
 using namespace std;
 
@@ -78,9 +80,17 @@ void Game::reshape(int w, int h) {
 }
 
 void Game::draw() {
+	errorecho("Flush");
+	
+	PhysicalShader& ps = Shader::getPhysicalShader();
+
+	ps.setAmbient(vec4(0.8, 1.0, 1.2, 0.5));
+	ps.setMaterial(16.0, 0.5);
+	Shader::lightApply();
+
 	fb.bind();
 
-	Shader::useWire();
+	ps.use();
 	glClearDepth(1.0);
 	glClearColor(0.5, 0.75, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -88,7 +98,7 @@ void Game::draw() {
 	glActiveTexture(GL_TEXTURE0);
 	pool->draw();
 	player->draw();
-	
+
 	fb.unbind();
 
 	Shader::useFramePass();
@@ -99,13 +109,19 @@ void Game::draw() {
 	glActiveTexture(GL_TEXTURE0);
 	fb.bindDiffuse();
 	Model::drawFramePassCanonical();
-
-	Shader::useWire();
+	
+	errorecho("Draw");
 
 	glutSwapBuffers();
 }
 
 void Game::update() {
+	if (Key::keyCheckPressed('1'))
+		Shader::switchPhysicalShader();
+
+	Shader::lightClear();
+	Shader::lightPush(vec4(1.0, -1.0, 1.0, 0.0), vec4(1.2, 1.0, 0.8, 1.0));
+
 	Object::countReset();
 
 	if (player->isExpired()) {

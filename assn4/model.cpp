@@ -48,6 +48,75 @@ void Model::drawFramePassCanonical() {
 
 Model::Model() {}
 
+void Model::addBox(vec3 pos1, vec3 pos2) {
+	vec3 pos111 = pos1;
+	vec3 pos112 = vec3(pos1.x, pos1.y, pos2.z);
+	vec3 pos121 = vec3(pos1.x, pos2.y, pos1.z);
+	vec3 pos122 = vec3(pos1.x, pos2.y, pos2.z);
+	vec3 pos211 = vec3(pos2.x, pos1.y, pos1.z);
+	vec3 pos212 = vec3(pos2.x, pos1.y, pos2.z);
+	vec3 pos221 = vec3(pos2.x, pos2.y, pos1.z);
+	vec3 pos222 = pos2;
+
+	vec3 nu = vec3(0.0, 0.0, 1.0);
+	vec3 nd = vec3(0.0, 0.0, -1.0);
+	vec3 nr = vec3(1.0, 0.0, 0.0);
+	vec3 nl = vec3(-1.0, 0.0, 0.0);
+	vec3 nf = vec3(0.0, 1.0, 0.0);
+	vec3 nb = vec3(0.0, -1.0, 0.0);
+
+	vec2 lt = vec2(0.0, 0.0);
+	vec2 rt = vec2(1.0, 0.0);
+	vec2 lb = vec2(0.0, 1.0);
+	vec2 rb = vec2(1.0, 1.0);
+
+	addPoint(pos111, lt, nl);
+	addPoint(pos112, rt, nl);
+	addPoint(pos121, lb, nl);
+	addPoint(pos121, lb, nl);
+	addPoint(pos112, rt, nl);
+	addPoint(pos122, rb, nl);
+
+	addPoint(pos112, lt, nu);
+	addPoint(pos212, rt, nu);
+	addPoint(pos122, lb, nu);
+	addPoint(pos122, lb, nu);
+	addPoint(pos212, rt, nu);
+	addPoint(pos222, rb, nu);
+
+	addPoint(pos212, lt, nr);
+	addPoint(pos211, rt, nr);
+	addPoint(pos222, lb, nr);
+	addPoint(pos222, lb, nr);
+	addPoint(pos211, rt, nr);
+	addPoint(pos221, rb, nr);
+
+	addPoint(pos211, lt, nd);
+	addPoint(pos111, rt, nd);
+	addPoint(pos221, lb, nd);
+	addPoint(pos221, lb, nd);
+	addPoint(pos111, rt, nd);
+	addPoint(pos121, rb, nd);
+
+	addPoint(pos211, lt, nb);
+	addPoint(pos212, rt, nb);
+	addPoint(pos111, lb, nb);
+	addPoint(pos111, lb, nb);
+	addPoint(pos212, rt, nb);
+	addPoint(pos112, rb, nb);
+
+	addPoint(pos221, lt, nf);
+	addPoint(pos121, rt, nf);
+	addPoint(pos222, lb, nf);
+	addPoint(pos222, lb, nf);
+	addPoint(pos121, rt, nf);
+	addPoint(pos122, rb, nf);
+}
+
+void Model::addPoint(vec3 pos, vec2 tex, vec3 norm) {
+	vertices.push_back(vertex(pos, tex, norm));
+}
+
 void Model::load(const char* fn) {
 	load(fn, NULL);
 }

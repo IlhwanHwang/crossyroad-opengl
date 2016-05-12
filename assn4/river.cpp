@@ -23,19 +23,19 @@ Water::Water(float y)
 void Water::draw() const {
 	Resource::Tex::white.bind();
 
-	Shader::translate(pos);
-	Shader::translate(vec3(0.0, 0.0, -4.0));
 	Shader::push();
-
-	for (float dx = -Game::getWidthLimit() - phase; dx < Game::getWidthLimit(); dx += Game::getGrid() * 2.0) {
-		Shader::translate(vec3(dx, 0.0, 0.0));
+		Shader::translate(pos);
+		Shader::translate(vec3(0.0, 0.0, -4.0));
+	
+		for (float dx = -Game::getWidthLimit() - phase; dx < Game::getWidthLimit(); dx += Game::getGrid() * 2.0) {
 		Shader::push();
-		Resource::water.draw();
-
+			Shader::translate(vec3(dx, 0.0, 0.0));
+			Shader::apply();
+			Resource::water.draw();
 		Shader::pop();
-	}
+		}
 
-	Object::draw();
+		Object::draw();
 	Shader::pop();
 }
 
@@ -58,12 +58,13 @@ Log::Log()
 void Log::draw() const {
 	Resource::Tex::logstab.bind();
 
-	Shader::translate(pos);
-	Shader::scale(0.8);
 	Shader::push();
-	Resource::logstab.draw();
+		Shader::translate(pos);
+		Shader::scale(0.8);
+		Shader::apply();
+		Resource::logstab.draw();
 
-	Object::draw();
+		Object::draw();
 	Shader::pop();
 }
 

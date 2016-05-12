@@ -45,11 +45,12 @@ void Bus::draw() const {
 
 	const float wheelHeight = 8.0;
 
+	Shader::push();
 	Shader::translate(pos);
 	Shader::translate(vec3(0.0, 0.0, wheelHeight + 3.0));
 	if (vel.x > 0)
 		Shader::rotateZ(180.0);
-	Shader::push();
+	Shader::apply();
 	Resource::bus.draw();
 
 	const float carWidth = 28.0;
@@ -59,31 +60,35 @@ void Bus::draw() const {
 
 	Resource::Tex::wheel.bind();
 
+	Shader::push();
 	Shader::translate(vec3(wheelFront, carWidth, 0.0));
 	Shader::rotateX(90.0);
 	Shader::rotateZ(wheelAngle);
-	Shader::push();
+	Shader::apply();
 	Resource::wheel.draw();
 	Shader::pop();
 
+	Shader::push();
 	Shader::translate(vec3(wheelFront, -carWidth, 0.0));
 	Shader::rotateX(90.0);
 	Shader::rotateZ(wheelAngle);
-	Shader::push();
+	Shader::apply();
 	Resource::wheel.draw();
 	Shader::pop();
 
+	Shader::push();
 	Shader::translate(vec3(wheelBack, carWidth, 0.0));
 	Shader::rotateX(90.0);
 	Shader::rotateZ(wheelAngle);
-	Shader::push();
+	Shader::apply();
 	Resource::wheel.draw();
 	Shader::pop();
 
+	Shader::push();
 	Shader::translate(vec3(wheelBack, -carWidth, 0.0));
 	Shader::rotateX(90.0);
 	Shader::rotateZ(wheelAngle);
-	Shader::push();
+	Shader::apply();
 	Resource::wheel.draw();
 	Shader::pop();
 
@@ -104,49 +109,54 @@ Car::Car() : Enemy::Enemy(70.0, 30.0, 35.0, 15.0){
 void Car::draw() const {
 	tex->bind();
 
-	Shader::translate(pos);
-	Shader::translate(vec3(0.0, 0.0, 3.0));
-	if (vel.x > 0)
-		Shader::rotateZ(180.0);
 	Shader::push();
-	Resource::car.draw();
+		Shader::translate(pos);
+		Shader::translate(vec3(0.0, 0.0, 3.0));
+		if (vel.x > 0)
+			Shader::rotateZ(180.0);
+		Shader::apply();
+		Resource::car.draw();
 
-	const float carWidth = 24.0;
-	const float wheelFront = -20.0;
-	const float wheelBack = 20.0;
-	const float wheelHeight = 8.0;
-	const float wheelAngle = dist / wheelHeight / DegreesToRadians;
+		const float carWidth = 20.0;
+		const float wheelFront = -30.0;
+		const float wheelBack = 28.0;
+		const float wheelHeight = 12.0;
+		const float wheelAngle = dist / wheelHeight / DegreesToRadians;
 
-	Resource::Tex::wheel.bind();
+		Resource::Tex::wheel.bind();
 
-	Shader::translate(vec3(wheelFront, carWidth, wheelHeight));
-	Shader::rotateX(90.0);
-	Shader::rotateZ(wheelAngle);
-	Shader::push();
-	Resource::wheel.draw();
-	Shader::pop();
+		Shader::push();
+			Shader::translate(vec3(wheelFront, carWidth, wheelHeight));
+			Shader::rotateX(90.0);
+			Shader::rotateZ(wheelAngle);
+			Shader::apply();
+			Resource::wheel.draw();
+		Shader::pop();
 
-	Shader::translate(vec3(wheelFront, -carWidth, wheelHeight));
-	Shader::rotateX(90.0);
-	Shader::rotateZ(wheelAngle);
-	Shader::push();
-	Resource::wheel.draw();
-	Shader::pop();
+		Shader::push();
+			Shader::translate(vec3(wheelFront, -carWidth, wheelHeight));
+			Shader::rotateX(90.0);
+			Shader::rotateZ(wheelAngle);
+			Shader::apply();
+			Resource::wheel.draw();
+		Shader::pop();
 
-	Shader::translate(vec3(wheelBack, carWidth, wheelHeight));
-	Shader::rotateX(90.0);
-	Shader::rotateZ(wheelAngle);
-	Shader::push();
-	Resource::wheel.draw();
-	Shader::pop();
+		Shader::push();
+			Shader::translate(vec3(wheelBack, carWidth, wheelHeight));
+			Shader::rotateX(90.0);
+			Shader::rotateZ(wheelAngle);
+			Shader::apply();
+			Resource::wheel.draw();
+		Shader::pop();
 
-	Shader::translate(vec3(wheelBack, -carWidth, wheelHeight));
-	Shader::rotateX(90.0);
-	Shader::rotateZ(wheelAngle);
-	Shader::push();
-	Resource::wheel.draw();
-	Shader::pop();
+		Shader::push();
+			Shader::translate(vec3(wheelBack, -carWidth, wheelHeight));
+			Shader::rotateX(90.0);
+			Shader::rotateZ(wheelAngle);
+			Shader::apply();
+			Resource::wheel.draw();
+		Shader::pop();
 
-	Object::draw();
+		Object::draw();
 	Shader::pop();
 }

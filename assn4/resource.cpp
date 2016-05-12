@@ -88,34 +88,29 @@ void Resource::init() {
 	const float grid = Game::getGrid();
 	const float thickness = 3.0;
 
-	/*
-	temp.addBox(vec3(-30.0, -30.0, 0.0), vec3(0.0, 30.0, 30.0), Color::white);
-	temp.addBox(vec3(0.0, -30.0, 0.0), vec3(30.0, 30.0, 30.0), Color::black);
-	temp.addBox(vec3(-30.0, -30.0, 30.0), vec3(0.0, 30.0, 60.0), Color::black);
-	temp.addBox(vec3(0.0, -30.0, 30.0), vec3(30.0, 30.0, 60.0), Color::white);
+	
+	temp.addBox(vec3(-30.0, -30.0, 0.0), vec3(0.0, 30.0, 30.0));
+	temp.addBox(vec3(0.0, -30.0, 0.0), vec3(30.0, 30.0, 30.0));
+	temp.addBox(vec3(-30.0, -30.0, 30.0), vec3(0.0, 30.0, 60.0));
+	temp.addBox(vec3(0.0, -30.0, 30.0), vec3(30.0, 30.0, 60.0));
 	temp.generate();
-	*/
 
-	/*
-	grass.addBox(vec3(-xlimit, -grid / 2.0, -grid), vec3(xlimit, grid / 2.0, thickness), Color::grass);
-	grass.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(-xlimit, grid / 2.0, 2.0*thickness), Color::darkgrass);
-	grass.addBox(vec3(xlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 2.0*thickness), Color::darkgrass);
+	grass.addBox(vec3(-xlimit, -grid / 2.0, -grid), vec3(xlimit, grid / 2.0, thickness));
+	grass.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(-xlimit, grid / 2.0, 2.0*thickness));
+	grass.addBox(vec3(xlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 2.0*thickness));
 	grass.generate();
-	*/
 
-	//roadLane.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 0.0), Color::gray);
-	//roadLane.generate();
+	roadLane.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 0.0));
+	roadLane.generate();
 
-	//roadLineYellow.addBox(vec3(-wlimit, -3.0, 0.0), vec3(wlimit, 3.0, thickness), Color::yellow);
-	//roadLineYellow.generate();
+	roadLineYellow.addBox(vec3(-wlimit, -3.0, 0.0), vec3(wlimit, 3.0, thickness));
+	roadLineYellow.generate();
 
 	const float w = 40.0;
 	const float wsep = 60.0;
 	for (float dx = wsep / 2.0; dx < wlimit; dx += w + wsep) {
-		//roadLineWhite.addBox(
-		//	vec3(dx, -3.0, 0.0), vec3(dx + w, 3.0, thickness), Color::white);
-		//roadLineWhite.addBox(
-		//	vec3(-dx - w, -3.0, 0.0), vec3(-dx, 3.0, thickness), Color::white);
+		roadLineWhite.addBox(vec3(dx, -3.0, 0.0), vec3(dx + w, 3.0, thickness));
+		roadLineWhite.addBox(vec3(-dx - w, -3.0, 0.0), vec3(-dx, 3.0, thickness));
 	}
 	//roadLineWhite.generate();
 

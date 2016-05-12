@@ -244,12 +244,15 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
-    <None Include="deferred_f.glsl" />
+    <None Include="flat_f.glsl" />
+    <None Include="flat_g.glsl" />
+    <None Include="flat_v.glsl" />
+    <None Include="gouraud_f.glsl" />
     <None Include="framepass_f.glsl" />
     <None Include="framepass_v.glsl" />
     <None Include="wire_f.glsl" />
     <None Include="wire_g.glsl" />
-    <None Include="deferred_v.glsl" />
+    <None Include="gouraud_v.glsl" />
     <None Include="wire_v.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

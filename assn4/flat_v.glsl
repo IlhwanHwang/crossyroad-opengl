@@ -7,7 +7,13 @@ layout (location = 2) in vec3 vNorm;
 uniform mat4 modelview;
 uniform mat4 projection;
 
+out vec4 gPos;
+out vec2 gTex;
+
 void main()
 {
-    gl_Position = projection * modelview * vPos / vPos.w;
+	gPos = modelview * vPos / vPos.w;
+    gl_Position = projection * gPos;
+
+	gTex = vTex;
 }

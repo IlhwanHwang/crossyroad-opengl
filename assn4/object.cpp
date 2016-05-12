@@ -10,6 +10,8 @@
 #include "game.h"
 #include "model.h"
 
+#include "debug.h"
+
 int Object::count = 0;
 
 void Object::countReset() {
@@ -63,6 +65,7 @@ void Object::echo() {
 }
 
 void Object::draw() const {
+	//errorecho(name);
 	for (list<Object*>::const_iterator itor = children.begin();
 		itor != children.end(); ++itor) {
 		(*itor)->draw();

@@ -32,6 +32,8 @@ Generator::Generator(enum type t, float y, bool left, float spd, float gapMin, f
 		alarmSet();
 		dx += alarm * spd;
 	}
+
+	name = "Generator";
 }
 
 void Generator::alarmSet() {
@@ -78,6 +80,8 @@ MetaGenerator::MetaGenerator() : Object::Object() {
 	target = Road::getLaneHeight() * 4.0;
 	for (float y = Game::getGrid() * (-6.0); y < target; y += Game::getGrid())
 		push(new Grass(y));
+
+	name = "Metagenerator";
 }
 
 void MetaGenerator::placeRoads() {

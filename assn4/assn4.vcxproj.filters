@@ -227,12 +227,6 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
-    <None Include="deferred_v.glsl">
-      <Filter>셰이더 파일</Filter>
-    </None>
-    <None Include="deferred_f.glsl">
-      <Filter>셰이더 파일</Filter>
-    </None>
     <None Include="framepass_f.glsl">
       <Filter>셰이더 파일</Filter>
     </None>
@@ -246,6 +240,21 @@
       <Filter>셰이더 파일</Filter>
     </None>
     <None Include="wire_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="gouraud_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="gouraud_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="flat_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="flat_g.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="flat_v.glsl">
       <Filter>셰이더 파일</Filter>
     </None>
   </ItemGroup>
