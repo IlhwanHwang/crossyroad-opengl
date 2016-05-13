@@ -202,6 +202,7 @@ void Model::load(const char* fn, const char* group) {
 	f.close();
 
 	cout << "Model: " << fn << " loaded with " << vertices.size() << " vertices" << endl;
+	generate();
 }
 
 void Model::generate() {

@@ -50,18 +50,18 @@ void Game::setup() {
 
 	for (float y = -grid * 4.0; y < grid * 4.0; y += grid)
 		mg->placeFlowers(y);
-	for (float y = -grid * 4.5; y < 0.0; y += grid)
+	for (float y = -grid * 4.0; y < 0.0; y += grid)
 		mg->placeTrees(y);
 
 	pool = new Object();
-	hillL = new Deco(vec3(0.0, 0.0, 0.0), &Resource::hill, &Resource::Tex::white);
-	hillR = new Deco(vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 180.0), &Resource::hill, &Resource::Tex::white);
+	hillL = new Deco(vec3(0.0, 0.0, 0.0), &Resource::hill, &Resource::Tex::grass);
+	hillR = new Deco(vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 180.0), &Resource::hill, &Resource::Tex::grass);
 	pool->push(mg);
 	pool->push(hillL);
 	pool->push(hillR);
 
 	NullLimiter* nl = new NullLimiter(0.0);
-	Deco* hillB = new Deco(vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 90.0), &Resource::hill, &Resource::Tex::white);
+	Deco* hillB = new Deco(vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 90.0), &Resource::hill, &Resource::Tex::grass);
 	nl->push(hillB);
 	pool->push(nl);
 
@@ -85,14 +85,15 @@ void Game::draw() {
 	PhysicalShader& ps = Shader::getPhysicalShader();
 
 	ps.setAmbient(vec4(0.8, 1.0, 1.2, 0.5));
-	ps.setMaterial(16.0, 0.5);
+	ps.setSpecular(1.0);
+	ps.setUVOffset(vec2(0.0, 0.0));
 	Shader::lightApply();
 
 	fb.bind();
 
-	ps.use();
+	Shader::usePhysicalShader();
 	glClearDepth(1.0);
-	glClearColor(0.5, 0.75, 1.0, 1.0);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glActiveTexture(GL_TEXTURE0);
@@ -101,6 +102,17 @@ void Game::draw() {
 
 	fb.unbind();
 
+	Shader::useFog();
+	glClearDepth(1.0);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glActiveTexture(GL_TEXTURE0);
+	fb.bindDiffuse();
+	glActiveTexture(GL_TEXTURE1);
+	fb.bindDepth();
+	Model::drawFramePassCanonical();
+	/*
 	Shader::useFramePass();
 	glClearDepth(1.0);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -109,7 +121,7 @@ void Game::draw() {
 	glActiveTexture(GL_TEXTURE0);
 	fb.bindDiffuse();
 	Model::drawFramePassCanonical();
-	
+	*/
 	errorecho("Draw");
 
 	glutSwapBuffers();
@@ -120,7 +132,7 @@ void Game::update() {
 		Shader::switchPhysicalShader();
 
 	Shader::lightClear();
-	Shader::lightPush(vec4(1.0, -1.0, 1.0, 0.0), vec4(1.2, 1.0, 0.8, 1.0));
+	Shader::lightPush(vec4(-1.0, -1.0, 1.0, 0.0), vec4(1.2, 1.0, 0.8, 1.0));
 
 	Object::countReset();
 

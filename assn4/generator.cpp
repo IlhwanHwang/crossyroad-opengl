@@ -58,8 +58,7 @@ Object* Generator::create() {
 	case TYPE_NONE:
 		break;
 	case TYPE_ENEMY:
-		if (frand() < 0.8) o = new Car();
-		else o = new Bus();
+		o = new Car();
 		break;
 	case TYPE_LOG:
 		o = new Log();
@@ -77,7 +76,7 @@ float MetaGenerator::difRate = 0.00005;
 
 MetaGenerator::MetaGenerator() : Object::Object() {
 	difficulty = 0.0;
-	target = Road::getLaneHeight() * 4.0;
+	target = Game::getGrid() * 4.0;
 	for (float y = Game::getGrid() * (-6.0); y < target; y += Game::getGrid())
 		push(new Grass(y));
 
@@ -89,16 +88,12 @@ void MetaGenerator::placeRoads() {
 	push(nl);
 
 	int lane;
-	if (difficulty < 0.2)
+	if (difficulty < 0.25)
 		lane = rand() % 2 + 1;
-	else if (difficulty < 0.4)
+	else if (difficulty < 0.5)
 		lane = rand() % 3 + 1;
-	else if (difficulty < 0.6)
-		lane = rand() % 4 + 1;
-	else if (difficulty < 0.8)
-		lane = rand() % 4 + 2;
-	else
-		lane = rand() % 3 + 3;
+	else if (difficulty < 0.75)
+		lane = rand() % 2 + 2;
 
 	float flane = (float)lane;
 	float spdMin = 1.0 + difficulty * 5.0;

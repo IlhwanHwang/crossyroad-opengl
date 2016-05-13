@@ -11,6 +11,7 @@
 #include "debug.h"
 
 GLuint Shader::shdFramePass;
+GLuint Shader::shdFog;
 PhysicalShader Shader::pshader[PSHADER_NUM];
 int Shader::pshaderCurrent = 0;
 mat4 Shader::modelViewCurrent;
@@ -41,6 +42,7 @@ void PhysicalShader::init(const char* fv, const char* fg, const char* ff) {
 	specularLightness = glGetUniformLocation(program, "specularLightness");
 
 	glUniform1i(glGetUniformLocation(program, "tex"), 0);
+	uvOffset = glGetUniformLocation(program, "uvOffset");
 }
 
 void PhysicalShader::setLights(int count, GLfloat* positions, GLfloat* colors) {
@@ -70,16 +72,22 @@ void PhysicalShader::setProjection(mat4& mat) {
 	glUniformMatrix4fv(projection, 1, GL_TRUE, mat);
 }
 
-void PhysicalShader::setMaterial(float p, float i) {
+void PhysicalShader::setSpecular(float s) {
 	glUseProgram(program);
-	glUniform1f(specularPower, p);
-	glUniform1f(specularLightness, i);
+	glUniform1f(specularPower, powf(16.0, s));
+	glUniform1f(specularLightness, s);
+}
+
+void PhysicalShader::setUVOffset(vec2& uv) {
+	glUseProgram(program);
+	glUniform2fv(uvOffset, 1, uv);
 }
 
 void Shader::init() {
 	pshader[0].init("flat_v.glsl", "flat_g.glsl", "flat_f.glsl");
 	pshader[1].init("gouraud_v.glsl", NULL, "gouraud_f.glsl");
-	pshader[2].init("wire_v.glsl", "wire_g.glsl", "wire_f.glsl");
+	pshader[2].init("phong_v.glsl", NULL, "phong_f.glsl");
+	pshader[3].init("wire_v.glsl", "wire_g.glsl", "wire_f.glsl");
 
 	mat4 ident;
 	modelViewStack.push(ident);
@@ -89,6 +97,17 @@ void Shader::init() {
 	loadShader(shdFramePass, GL_FRAGMENT_SHADER, "framepass_f.glsl");
 	linkProgram(shdFramePass);
 	glUniform1i(glGetUniformLocation(shdFramePass, "tex"), 0);
+
+	shdFog = glCreateProgram();
+	loadShader(shdFog, GL_VERTEX_SHADER, "fog_v.glsl");
+	loadShader(shdFog, GL_FRAGMENT_SHADER, "fog_f.glsl");
+	linkProgram(shdFog);
+	glUniform1i(glGetUniformLocation(shdFog, "color"), 0);
+	glUniform1i(glGetUniformLocation(shdFog, "depth"), 1);
+	glUniform1f(glGetUniformLocation(shdFog, "fogRate"), 0.5);
+	glUniform4fv(glGetUniformLocation(shdFog, "fogColor"), 1, vec4(0.8, 0.9, 1.0, 1.0));
+	glUniform1f(glGetUniformLocation(shdFog, "zNear"), 10.0);
+	glUniform1f(glGetUniformLocation(shdFog, "zFar"), 1000.0);
 
 	lightCount = 0;
 }

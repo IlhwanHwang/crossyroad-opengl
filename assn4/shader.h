@@ -11,7 +11,7 @@
 
 #include "mat.h"
 
-#define PSHADER_NUM 3
+#define PSHADER_NUM 4
 
 using namespace std;
 
@@ -30,6 +30,8 @@ private:
 	GLuint specularPower;
 	GLuint specularLightness;
 
+	GLuint uvOffset;
+
 public:
 	void init(const char* fv, const char* fg, const char* ff);
 	void use() { glUseProgram(program); }
@@ -40,7 +42,8 @@ public:
 	void setAmbient(vec4& color);
 	void setModelView(mat4& mat);
 	void setProjection(mat4& mat);
-	void setMaterial(float p, float i);
+	void setSpecular(float s);
+	void setUVOffset(vec2& uv);
 
 	GLuint getLightAmbient() { return lightAmbient; }
 };
@@ -48,6 +51,7 @@ public:
 class Shader {
 private:
 	static GLuint shdFramePass;
+	static GLuint shdFog;
 
 	static PhysicalShader pshader[PSHADER_NUM];
 	static int pshaderCurrent;
@@ -63,6 +67,7 @@ public:
 	static void usePhysicalShader() { pshader[pshaderCurrent].use(); }
 	static void switchPhysicalShader() { pshaderCurrent = (pshaderCurrent + 1) % PSHADER_NUM; }
 	static void useFramePass() { glUseProgram(shdFramePass); }
+	static void useFog() { glUseProgram(shdFog); }
 
 	static void translate(vec3 pos) { modelViewCurrent *= Matrix::Translate(pos); }
 	static void rotateX(float a) { modelViewCurrent *= Matrix::RotateX(a); }

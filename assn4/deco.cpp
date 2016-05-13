@@ -14,54 +14,20 @@
 #include "resource.h"
 #include "shader.h"
 
-float Road::laneHeight = Game::getGrid();
-float Road::laneLineWidth = 40.0;
-float Road::laneLineSeperate = 60.0;
-float Road::laneLineHeight = 3.0;
-
-float Road::getLaneHeight() {
-	return laneHeight;
-}
+#include "debug.h"
 
 Road::Road(int lane) : Object::Object(0.0, 0.0, 0.0, 0.0) {
 	this->lane = lane;
-	offset = -frand() * (laneLineWidth + laneLineSeperate);
 	name = "Road";
 }
 
 void Road::draw() const {
-	Resource::Tex::white.bind();
+	Resource::Tex::road.bind();
 	Shader::push();
 		Shader::translate(pos);
-
-		for (float i = 0.0; i < (float)(lane * 2); i += 1.0) {
-		Shader::push();
-			Shader::translate(vec3(0.0, i * Game::getGrid(), 0.0));
-			Shader::apply();
-			Resource::roadLane.draw();
-		Shader::pop();
-		}
-
-		for (float i = 0.5; i < (float)(lane - 1); i += 1.0) {
-		Shader::push();
-			Shader::translate(vec3(0.0, i * Game::getGrid(), 0.0));
-			Shader::apply();
-			Resource::roadLineWhite.draw();
-		Shader::pop();
-
-		Shader::push();
-			Shader::translate(vec3(0.0,(i + (float)lane) * Game::getGrid(), 0.0));
-			Shader::apply();
-			Resource::roadLineWhite.draw();
-		Shader::pop();
-		}
-
-		Shader::push();
-			Shader::translate(vec3(0.0, ((float)lane - 0.5) * Game::getGrid(), 0.0));
-			Shader::apply();
-			Resource::roadLineYellow.draw();
-		Shader::pop();
-
+		Shader::translate(vec3(0.0, (lane - 0.5) * Game::getGrid(), 0.0));
+		Shader::apply();
+		Resource::road[lane - 1].draw();
 		Object::draw();
 	Shader::pop();
 }
@@ -85,18 +51,21 @@ Env::Env(vec3 pos) : Object::Object(0.0, 0.0, 0.0, 0.0) {
 Grass::Grass(float y) : Env::Env(vec3(0.0, y, 0.0)) { name = "Grass"; }
 
 void Grass::draw() const {
-	Resource::Tex::white.bind();
+	Resource::Tex::grass.bind();
 	Shader::push();
 	Shader::translate(pos);
 	Shader::apply();
+	Shader::getPhysicalShader().setUVOffset(vec2(0.0, pos.y / Game::getGrid() / 3.0));
 	Resource::grass.draw();
+	Shader::getPhysicalShader().setUVOffset(vec2(0.0, 0.0));
 
 	Object::draw();
 	Shader::pop();
 }
 
 Tree::Tree(float x, float y) : Env::Env(x, y, Game::getGrid(), Game::getGrid(), Game::getGrid() * 0.5, Game::getGrid() * 0.5) {
-	radius = frandRange(20.0, 30.0);
+	scale = frandRange(1.0, 1.5);
+	rotation = frandRange(0.0, 360.0);
 	cat = OBJ_RIGID;
 	name = "Tree";
 }
@@ -105,6 +74,8 @@ void Tree::draw() const {
 	Resource::Tex::tree.bind();
 	Shader::push();
 	Shader::translate(pos);
+	Shader::scale(vec3(scale, scale, scale));
+	Shader::rotateZ(rotation);
 	Shader::apply();
 	Resource::tree.draw();
 

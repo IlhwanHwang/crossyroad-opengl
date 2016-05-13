@@ -10,8 +10,7 @@ uniform mat4 projection;
 out vec4 gPos;
 out vec2 gTex;
 
-void main()
-{
+void main() {
 	gPos = modelview * vPos / vPos.w;
     gl_Position = projection * gPos;
 

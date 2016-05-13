@@ -28,7 +28,7 @@ float View::offsetTop = View::height * 0.55;
 float View::offsetLeft = View::width * 0.5;
 
 float View::zfar = 1000.0;
-float View::znear = 1.0;
+float View::znear = 10.0;
 float View::aspect = View::width / View::height;
 float View::dist = 400.0;
 

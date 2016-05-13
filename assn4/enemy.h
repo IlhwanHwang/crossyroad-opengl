@@ -16,14 +16,6 @@ public:
 	void update();
 };
 
-class Bus : public Enemy {
-private:
-	Texture* tex;
-public:
-	Bus();
-	void draw() const;
-};
-
 class Car : public Enemy {
 private:
 	Texture* tex;

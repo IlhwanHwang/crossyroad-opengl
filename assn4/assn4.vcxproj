@@ -191,14 +191,13 @@
     <ClInclude Include="view.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bus_blue.png" />
-    <Image Include="bus_red.png" />
-    <Image Include="bus_yellow.png" />
     <Image Include="car.png" />
     <Image Include="car_blue.png" />
     <Image Include="car_gray.png" />
     <Image Include="gorani_whole.png" />
+    <Image Include="grass.png" />
     <Image Include="log.png" />
+    <Image Include="road.png" />
     <Image Include="test.png" />
     <Image Include="tree.png" />
     <Image Include="tunnel.png" />
@@ -206,9 +205,6 @@
     <Image Include="white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="bus.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
     <Object Include="car.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
@@ -221,6 +217,9 @@
     <Object Include="gorani.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
+    <Object Include="grass.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
     <Object Include="hill.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
@@ -228,6 +227,18 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="player.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="road1.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="road2.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="road3.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="road4.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="tree.obj">
@@ -244,6 +255,10 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
+    <None Include="fog_f.glsl" />
+    <None Include="fog_v.glsl" />
+    <None Include="phong_f.glsl" />
+    <None Include="phong_v.glsl" />
     <None Include="flat_f.glsl" />
     <None Include="flat_g.glsl" />
     <None Include="flat_v.glsl" />

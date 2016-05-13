@@ -6,8 +6,7 @@ layout (location = 2) out vec4 pPosition;
 
 vec4 fCol = vec4(0.0, 0.0, 0.0, 1.0);
 
-void main()
-{
+void main() {
 	pDiffuse = fCol;
 	pNormal = fCol;
 	pPosition = fCol;

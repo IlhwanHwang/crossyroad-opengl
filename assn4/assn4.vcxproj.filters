@@ -148,15 +148,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bus_blue.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="bus_red.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="bus_yellow.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="car.png">
       <Filter>리소스 파일</Filter>
     </Image>
@@ -187,11 +178,14 @@
     <Image Include="white.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="road.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="grass.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="bus.obj">
-      <Filter>모델 파일</Filter>
-    </Object>
     <Object Include="car.obj">
       <Filter>모델 파일</Filter>
     </Object>
@@ -225,6 +219,21 @@
     <Object Include="wheel.obj">
       <Filter>모델 파일</Filter>
     </Object>
+    <Object Include="road3.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="road4.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="road1.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="road2.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="grass.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <None Include="framepass_f.glsl">
@@ -255,6 +264,18 @@
       <Filter>셰이더 파일</Filter>
     </None>
     <None Include="flat_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="phong_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="phong_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="fog_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="fog_v.glsl">
       <Filter>셰이더 파일</Filter>
     </None>
   </ItemGroup>

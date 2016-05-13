@@ -21,17 +21,14 @@ public:
 		static Texture carBlue;
 		static Texture goraniWhole;
 		static Texture wheel;
-		static Texture busRed;
-		static Texture busYellow;
-		static Texture busBlue;
 		static Texture logstab;
 		static Texture tree;
 		static Texture tunnel;
+		static Texture road;
+		static Texture grass;
 
 		static void init();
 	};
-
-	static Model canonical;
 
 	static Model temp;
 
@@ -44,11 +41,11 @@ public:
 	static Model player;
 
 	static Model car;
-	static Model bus;
 	static Model wheel;
 	static Model tree;
 	static Model tunnel;
 	static Model drain;
+	static Model road[4];
 
 	static Model goraniTorso;
 	static Model goraniHead;
@@ -57,10 +54,6 @@ public:
 	static Model goraniLegFrontBottom;
 	static Model goraniLegBackTop;
 	static Model goraniLegBackBottom;
-
-	static Model roadLane;
-	static Model roadLineYellow;
-	static Model roadLineWhite;
 
 	static void init();
 };

@@ -10,16 +10,8 @@
 
 class Road : public Object {
 private:
-	static float laneHeight;
-	static float laneLineWidth;
-	static float laneLineHeight;
-	static float laneLineSeperate;
-
 	int lane;
-	float offset;
 public:
-	static float getLaneHeight();
-
 	Road(int lane);
 	void draw() const;
 	void update();
@@ -39,7 +31,8 @@ public:
 
 class Tree : public Env {
 private:
-	float radius;
+	float scale, rotation;
+
 public:
 	Tree(float x, float y);
 	void draw() const;

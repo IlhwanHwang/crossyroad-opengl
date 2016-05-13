@@ -7,7 +7,6 @@ layout (location = 2) in vec3 vNorm;
 uniform mat4 modelview;
 uniform mat4 projection;
 
-void main()
-{
+void main() {
     gl_Position = projection * modelview * vPos / vPos.w;
 }
