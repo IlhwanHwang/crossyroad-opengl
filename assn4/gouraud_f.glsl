@@ -8,7 +8,6 @@ in vec3 fNorm;
 
 uniform sampler2D color;
 uniform sampler2D normal;
-
 uniform vec2 uvOffset;
 
 layout (location = 0) out vec4 pDiffuse;

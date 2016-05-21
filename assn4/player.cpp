@@ -46,6 +46,7 @@ void Player::draw() const {
 	const float bodyWidth = 8.0;
 
 	Resource::Tex::goraniWhole.bind();
+	Resource::Norm::flat.bind();
 
 	Shader::push();
 		Shader::translate(vec3(xx, yy, pos.z + 10.0 * sFac));

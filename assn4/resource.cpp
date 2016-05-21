@@ -3,8 +3,8 @@
 // resource management
 //
 
-#include "vec.h"
 #include "resource.h"
+#include "vec.h"
 #include "game.h"
 #include "lodepng.h"
 
@@ -20,14 +20,30 @@ Texture Resource::Tex::tree;
 Texture Resource::Tex::tunnel;
 Texture Resource::Tex::road;
 Texture Resource::Tex::grass;
+Texture Resource::Tex::water;
+Texture Resource::Tex::streetlight;
+Texture Resource::Tex::noise;
+Texture Resource::Tex::chicken;
+
+Texture Resource::Norm::flat;
+Texture Resource::Norm::grass;
+Texture Resource::Norm::logstab;
+Texture Resource::Norm::tree;
+Texture Resource::Norm::road;
+Texture Resource::Norm::water;
+Texture Resource::Norm::tunnel;
+Texture Resource::Norm::chicken;
+Texture Resource::Norm::car;
 
 Model Resource::temp;
 
-Model Resource::grass;
+Model Resource::grass[3];
+Model Resource::grass9;
 Model Resource::water;
 Model Resource::logstab;
 Model Resource::flower;
 Model Resource::hill;
+Model Resource::streetlight;
 
 Model Resource::player;
 
@@ -46,47 +62,57 @@ Model Resource::goraniLegFrontBottom;
 Model Resource::goraniLegBackTop;
 Model Resource::goraniLegBackBottom;
 
+Model Resource::chicken;
+
 void Resource::Tex::init() {
-	test.load("test.png");
-	white.load("white.png");
-	carWhite.load("car.png");
-	carGray.load("car_gray.png");
-	carBlue.load("car_blue.png");
-	goraniWhole.load("gorani_whole.png");
-	wheel.load("wheel.png");
-	logstab.load("log.png");
-	tree.load("tree.png");
-	tunnel.load("tunnel.png");
-	road.load("road.png");
-	grass.load("grass.png");
-	glActiveTexture(GL_TEXTURE0);
+	test.load("test.png", GL_TEXTURE0);
+	white.load("white.png", GL_TEXTURE0);
+	carWhite.load("car.png", GL_TEXTURE0);
+	carGray.load("car_gray.png", GL_TEXTURE0);
+	carBlue.load("car_blue.png", GL_TEXTURE0);
+	goraniWhole.load("gorani_whole.png", GL_TEXTURE0);
+	wheel.load("wheel.png", GL_TEXTURE0);
+	logstab.load("log.png", GL_TEXTURE0);
+	tree.load("tree.png", GL_TEXTURE0);
+	tunnel.load("tunnel.png", GL_TEXTURE0);
+	road.load("road.png", GL_TEXTURE0);
+	grass.load("grass.png", GL_TEXTURE0);
+	water.load("water.png", GL_TEXTURE0);
+	streetlight.load("streetlight.png", GL_TEXTURE0);
+	noise.load("noise.png", GL_TEXTURE0);
+	chicken.load("chicken.png", GL_TEXTURE0);
+}
+
+void Resource::Norm::init() {
+	flat.load("normal_flat.png", GL_TEXTURE1);
+	grass.load("normal_grass.png", GL_TEXTURE1);
+	logstab.load("normal_log.png", GL_TEXTURE1);
+	tree.load("normal_tree.png", GL_TEXTURE1);
+	road.load("normal_road.png", GL_TEXTURE1);
+	water.load("normal_water.png", GL_TEXTURE1);
+	tunnel.load("normal_tunnel.png", GL_TEXTURE1);
+	chicken.load("normal_chicken.png", GL_TEXTURE1);
+	car.load("normal_car.png", GL_TEXTURE1);
 }
 
 void Resource::init() {
 	Tex::init();
+	Norm::init();
 
 	const float wlimit = Game::getWidthLimit();
 	const float xlimit = Game::getGrid() * 3.5;
 	const float grid = Game::getGrid();
 	const float thickness = 3.0;
 
-	
-	temp.addBox(vec3(-30.0, -30.0, 0.0), vec3(0.0, 30.0, 30.0));
-	temp.addBox(vec3(0.0, -30.0, 0.0), vec3(30.0, 30.0, 30.0));
-	temp.addBox(vec3(-30.0, -30.0, 30.0), vec3(0.0, 30.0, 60.0));
-	temp.addBox(vec3(0.0, -30.0, 30.0), vec3(30.0, 30.0, 60.0));
-	temp.generate();
-
-	grass.addBox(vec3(-xlimit, -grid / 2.0, -grid), vec3(xlimit, grid / 2.0, thickness));
-	grass.addBox(vec3(-wlimit, -grid / 2.0, -grid), vec3(-xlimit, grid / 2.0, 2.0*thickness));
-	grass.addBox(vec3(xlimit, -grid / 2.0, -grid), vec3(wlimit, grid / 2.0, 2.0*thickness));
-	grass.generate();
-
+	grass[0].load("grass1.obj");
+	grass[1].load("grass2.obj");
+	grass[2].load("grass3.obj");
+	grass9.load("grass9.obj");
 	water.load("water.obj");
 	logstab.load("log.obj");
 	flower.load("flower.obj");
 	hill.load("hill.obj");
-	grass.load("grass.obj");
+	streetlight.load("streetlight.obj");
 
 	player.load("player.obj");
 	car.load("car.obj");
@@ -107,4 +133,6 @@ void Resource::init() {
 	goraniLegFrontBottom.load("gorani.obj", "leg_front_bottom");
 	goraniLegBackTop.load("gorani.obj", "leg_back_top");
 	goraniLegBackBottom.load("gorani.obj", "leg_back_bottom");
+
+	chicken.load("chicken.obj");
 }

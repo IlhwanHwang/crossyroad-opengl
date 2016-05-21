@@ -35,5 +35,4 @@ public:
 	MetaGenerator();
 	void update();
 	void placeTrees(float y);
-	void placeFlowers(float y);
 };

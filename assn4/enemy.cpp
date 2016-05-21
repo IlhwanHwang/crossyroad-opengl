@@ -31,21 +31,17 @@ void Enemy::update() {
 }
 
 Car::Car() : Enemy::Enemy(70.0, 30.0, 35.0, 15.0){
-	switch (rand() % 4) {
-	case 0: tex = &Resource::Tex::carWhite; break;
-	case 1: tex = &Resource::Tex::carGray; break;
-	case 2: tex = &Resource::Tex::carGray; break;
-	case 3: tex = &Resource::Tex::carBlue; break;
-	}
+	tex = &Resource::Tex::carWhite;
 	name = "Car";
 }
 
 void Car::draw() const {
 	tex->bind();
+	Resource::Norm::car.bind();
 
 	Shader::push();
 		Shader::translate(pos);
-		Shader::translate(vec3(0.0, 0.0, 3.0));
+		Shader::translate(vec3(0.0, 0.0, 0.0));
 		if (vel.x > 0)
 			Shader::rotateZ(180.0);
 		Shader::apply();
@@ -58,6 +54,7 @@ void Car::draw() const {
 		const float wheelAngle = dist / wheelHeight / DegreesToRadians;
 
 		Resource::Tex::wheel.bind();
+		Resource::Norm::flat.bind();
 
 		Shader::push();
 			Shader::translate(vec3(wheelFront, carWidth, wheelHeight));

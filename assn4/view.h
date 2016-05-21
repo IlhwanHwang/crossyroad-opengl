@@ -33,6 +33,7 @@ public:
 	static void setAspect(float asp);
 	static void setViewDir(float dir);
 	static void update();
+	static void draw();
 	static float getWidth();
 	static float getHeight();
 	static float getX();

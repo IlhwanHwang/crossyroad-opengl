@@ -23,12 +23,6 @@ public:
 	Env(vec3 pos);
 };
 
-class Grass : public Env {
-public:
-	Grass(float y);
-	void draw() const;
-};
-
 class Tree : public Env {
 private:
 	float scale, rotation;
@@ -42,9 +36,12 @@ class Deco : public Object {
 private:
 	Model* model;
 	Texture* texture;
+	Texture* normalmap;
 	vec3 orient;
+	vec2 uvshift;
 public:
-	Deco(vec3 pos, Model* model, Texture* texture);
-	Deco(vec3 pos, vec3 orient, Model* model, Texture* texture);
+	Deco(vec3 pos, Model* model, Texture* texture, Texture* normalmap);
+	Deco(vec3 pos, vec3 orient, Model* model, Texture* texture, Texture* normalmap);
 	void draw() const;
+	void shift(vec2 uv) { uvshift = uv; }
 };

@@ -5,14 +5,16 @@
 
 #pragma once
 
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 class Texture {
 private:
 	unsigned w, h;
 	GLuint buf;
+	GLenum type;
 
 public:
-	void load(const char* fn);
+	void load(const char* fn, GLenum type);
 	void bind();
+	void nbind();
 };

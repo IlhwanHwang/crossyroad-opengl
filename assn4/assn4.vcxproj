@@ -91,6 +91,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt</AdditionalIncludeDirectories>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="control.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="deco.cpp" />
     <ClCompile Include="enemy.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="generator.cpp" />
     <ClCompile Include="InitShader.cpp" />
     <ClCompile Include="key.cpp" />
+    <ClCompile Include="light.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="model.cpp" />
@@ -168,6 +171,7 @@
     <ClCompile Include="view.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="control.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="deco.h" />
     <ClInclude Include="enemy.h" />
@@ -176,6 +180,7 @@
     <ClInclude Include="generator.h" />
     <ClInclude Include="InitShader.h" />
     <ClInclude Include="key.h" />
+    <ClInclude Include="light.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="mat.h" />
     <ClInclude Include="model.h" />
@@ -191,21 +196,38 @@
     <ClInclude Include="view.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\Downloads\normal_log.png" />
+    <Image Include="..\..\..\..\Model\Texture\streetlight.png" />
     <Image Include="car.png" />
     <Image Include="car_blue.png" />
     <Image Include="car_gray.png" />
+    <Image Include="chicken.png" />
     <Image Include="gorani_whole.png" />
     <Image Include="grass.png" />
     <Image Include="log.png" />
+    <Image Include="noise.png" />
+    <Image Include="normal_car.png" />
+    <Image Include="normal_chicken.png" />
+    <Image Include="normal_flat.png" />
+    <Image Include="normal_grass.png" />
+    <Image Include="normal_road.png" />
+    <Image Include="normal_test.png" />
+    <Image Include="normal_tree.png" />
+    <Image Include="normal_tunnel.png" />
+    <Image Include="normal_water.png" />
     <Image Include="road.png" />
     <Image Include="test.png" />
     <Image Include="tree.png" />
     <Image Include="tunnel.png" />
+    <Image Include="water.png" />
     <Image Include="wheel.png" />
     <Image Include="white.png" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="car.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="chicken.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="drain.obj">
@@ -218,6 +240,18 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="grass.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="grass1.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="grass2.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="grass3.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="grass9.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="hill.obj">
@@ -241,6 +275,9 @@
     <Object Include="road4.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
+    <Object Include="streetlight.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
     <Object Include="tree.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
@@ -255,9 +292,14 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
+    <None Include="blur_f.glsl" />
+    <None Include="blur_v.glsl" />
     <None Include="fog_f.glsl" />
     <None Include="fog_v.glsl" />
+    <None Include="hide_f.glsl" />
+    <None Include="hide_v.glsl" />
     <None Include="phong_f.glsl" />
+    <None Include="phong_g.glsl" />
     <None Include="phong_v.glsl" />
     <None Include="flat_f.glsl" />
     <None Include="flat_g.glsl" />
@@ -265,6 +307,8 @@
     <None Include="gouraud_f.glsl" />
     <None Include="framepass_f.glsl" />
     <None Include="framepass_v.glsl" />
+    <None Include="ssao_f.glsl" />
+    <None Include="ssao_v.glsl" />
     <None Include="wire_f.glsl" />
     <None Include="wire_g.glsl" />
     <None Include="gouraud_v.glsl" />

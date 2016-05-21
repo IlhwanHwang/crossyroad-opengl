@@ -16,6 +16,7 @@
 #include "river.h"
 #include "null.h"
 #include "resource.h"
+#include "light.h"
 
 Generator::Generator(enum type t, float y, bool left, float spd, float gapMin, float gapMax)
 	: Object::Object() {
@@ -77,9 +78,6 @@ float MetaGenerator::difRate = 0.00005;
 MetaGenerator::MetaGenerator() : Object::Object() {
 	difficulty = 0.0;
 	target = Game::getGrid() * 4.0;
-	for (float y = Game::getGrid() * (-6.0); y < target; y += Game::getGrid())
-		push(new Grass(y));
-
 	name = "Metagenerator";
 }
 
@@ -116,12 +114,20 @@ void MetaGenerator::placeRoads() {
 			);
 		nl->push(
 			new Deco(
-				vec3(wlimit, y, 0.0), vec3(0.0, 0.0, 90.0), &Resource::tunnel, &Resource::Tex::tunnel
+				vec3(wlimit, y, 0.0), 
+				vec3(0.0, 0.0, 90.0), 
+				&Resource::tunnel, 
+				&Resource::Tex::tunnel,
+				&Resource::Norm::tunnel
 				)
 			);
 		nl->push(
 			new Deco(
-				vec3(-wlimit, y, 0.0), vec3(0.0, 0.0, -90.0), &Resource::tunnel, &Resource::Tex::tunnel
+				vec3(-wlimit, y, 0.0), 
+				vec3(0.0, 0.0, -90.0), 
+				&Resource::tunnel, 
+				&Resource::Tex::tunnel,
+				&Resource::Norm::tunnel
 				)
 			);
 	}
@@ -150,12 +156,20 @@ void MetaGenerator::placeRivers() {
 			);
 		nl->push(
 			new Deco(
-				vec3(-wlimit, target, 0.0), vec3(0.0, 0.0, 180.0), &Resource::drain, &Resource::Tex::white
+				vec3(-wlimit, target, 0.0), 
+				vec3(0.0, 0.0, 180.0), 
+				&Resource::drain, 
+				&Resource::Tex::tunnel,
+				&Resource::Norm::tunnel
 				)
 			);
 		nl->push(
 			new Deco(
-				vec3(wlimit, target, 0.0), vec3(0.0, 0.0, 0.0), &Resource::drain, &Resource::Tex::white
+				vec3(wlimit, target, 0.0), 
+				vec3(0.0, 0.0, 0.0), 
+				&Resource::drain, 
+				&Resource::Tex::tunnel,
+				&Resource::Norm::tunnel
 				)
 			);
 
@@ -167,17 +181,35 @@ void MetaGenerator::placeSafezone() {
 	NullLimiter* nl = new NullLimiter(target);
 	push(nl);
 
-	float sep = 0.0;
+	int repeat = rand() % 3 + 1;
 
-	for (int repeat = rand() % 3 + 1; repeat > 0; repeat--) {
-		sep += 1.0;
-		
-		placeFlowers(target);
-		placeTrees(target);
-		nl->push(new Grass(target));
+	nl->push(new Deco(
+		vec3(0.0, target, 0.0),
+		&Resource::grass[repeat - 1],
+		&Resource::Tex::grass,
+		&Resource::Norm::grass
+		));
 
-		target += Game::getGrid();
+	for (int i = 0; i < repeat; i++) {
+		placeTrees(target + Game::getGrid() * i);
 	}
+
+	for (int i = 0; i < repeat + 1; i++) {
+		if (frand() < 0.5) {
+			int limit = (int)(Game::getWidthLimit() / Game::getGrid());
+			int ind = rand() % (2 * limit - 1) - limit;
+			nl->push(
+				new StreetLight(
+					vec3(
+						((float)ind + 0.5) * Game::getGrid(),
+						target + Game::getGrid() * ((float)i - 0.5),
+						0.0
+					))
+				);
+		}
+	}
+
+	target += Game::getGrid() * repeat;
 }
 
 void MetaGenerator::update() {
@@ -211,19 +243,5 @@ void MetaGenerator::placeTrees(float y) {
 
 	for (int i = 0; i < num; i++) {
 		nl->push(new Tree((float)(location + i) * Game::getGrid(), y));
-	}
-}
-
-void MetaGenerator::placeFlowers(float y) {
-	NullLimiter* nl = new NullLimiter(y);
-	push(nl);
-
-	for (int repeat = rand() % 4 + 2; repeat > 0; repeat--) {
-		nl->push(
-			new Deco(
-				vec3(Game::getWidthLimit() * frandRange(-1.0, 1.0), y + Game::getGrid() * frandRange(-0.5, 0.5), 0.0),
-				&Resource::flower, &Resource::Tex::white
-				)
-			);
 	}
 }

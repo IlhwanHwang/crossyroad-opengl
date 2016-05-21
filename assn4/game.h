@@ -20,6 +20,7 @@ private:
 	static float widthLimit;
 	static int frameInterval;
 	static Framebuffer fb;
+	static FramebufferSingle fbs;
 
 public:
 	static void init();

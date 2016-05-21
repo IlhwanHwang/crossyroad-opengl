@@ -36,9 +36,9 @@ void main(int argc, char **argv)
 	glewExperimental = GL_TRUE;
 	glewInit();
 
+	Shader::init();
 	Model::init();
 	Resource::init();
-	Shader::init();
 
 	Game::init();
 	

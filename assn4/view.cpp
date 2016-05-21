@@ -62,8 +62,10 @@ void View::update() {
 
 	x = flerp(tx, x, 0.9);
 	y = flerp(ty, y, 0.9);
+}
 
-	mat4 Project;
+void View::draw() {
+	mat4 projection, eyeview;
 	vec4 eye, at, up;
 
 	switch (viewMode) {
@@ -72,8 +74,8 @@ void View::update() {
 		at = eye + vec4(cosf(degToRad(viewDir)), sinf(degToRad(viewDir)), 0.0, 0.0);
 		up = vec4(0.0, 0.0, 1.0, 0.0);
 
-		Project *= Matrix::Perspective(45.0, aspect, znear, zfar);
-		Project *= Matrix::LookAt(eye, at, up);
+		projection = Matrix::Perspective(45.0, aspect, znear, zfar);
+		eyeview = Matrix::LookAt(eye, at, up);
 		break;
 
 	case VIEW_BACK:
@@ -82,20 +84,23 @@ void View::update() {
 		eye += vec4(0.0, 0.0, dist * 0.5, 0.0);
 		up = vec4(0.0, 0.0, 1.0, 0.0);
 
-		Project *= Matrix::Perspective(45.0, aspect, znear, zfar);
-		Project *= Matrix::LookAt(eye, at, up);
+		projection = Matrix::Perspective(45.0, aspect, znear, zfar);
+		eyeview = Matrix::LookAt(eye, at, up);
 		break;
 
 	case VIEW_BIRD:
-		Project *= Matrix::Ortho(-height / 3.0 * aspect, height / 3.0 * aspect, -height / 3.0, height / 3.0, -height, height);
-		eye = vec4(0.0, y, 0.0, 1.0);
+		eye = vec4(0.0, y, zfar * 0.2, 1.0);
 		at = vec4(0.0, y, -1.0, 1.0);
 		up = vec4(0.0, 1.0, 0.0, 0.0);
-		Project *= Matrix::LookAt(eye, at, up);
+
+		projection = Matrix::Ortho(-height / 3.0 * aspect, height / 3.0 * aspect, -height / 3.0, height / 3.0, -height, height);
+		eyeview = Matrix::LookAt(eye, at, up);
+		eye = vec4(0.0, y, zfar, 1.0);
 		break;
 	}
 
-	Shader::getPhysicalShader().setProjection(Project);
+	Shader::getPhysicalShader().setProjection(projection);
+	Shader::getPhysicalShader().setEyeView(eyeview);
 	Shader::getPhysicalShader().setEye(eye);
 }
 

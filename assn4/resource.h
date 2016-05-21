@@ -5,7 +5,6 @@
 
 #pragma once
 
-#include <GL/glut.h>
 #include "vec.h"
 #include "model.h"
 #include "texture.h"
@@ -26,17 +25,38 @@ public:
 		static Texture tunnel;
 		static Texture road;
 		static Texture grass;
+		static Texture water;
+		static Texture streetlight;
+		static Texture noise;
+		static Texture chicken;
+
+		static void init();
+	};
+
+	class Norm {
+	public:
+		static Texture flat;
+		static Texture grass;
+		static Texture logstab;
+		static Texture tree;
+		static Texture road;
+		static Texture water;
+		static Texture tunnel;
+		static Texture chicken;
+		static Texture car;
 
 		static void init();
 	};
 
 	static Model temp;
 
-	static Model grass;
+	static Model grass[3];
+	static Model grass9;
 	static Model water;
 	static Model logstab;
 	static Model flower;
 	static Model hill;
+	static Model streetlight;
 
 	static Model player;
 
@@ -54,6 +74,8 @@ public:
 	static Model goraniLegFrontBottom;
 	static Model goraniLegBackTop;
 	static Model goraniLegBackBottom;
+
+	static Model chicken;
 
 	static void init();
 };

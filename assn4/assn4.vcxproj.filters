@@ -81,6 +81,12 @@
     <ClCompile Include="framebuffer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="control.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="deco.h">
@@ -146,6 +152,12 @@
     <ClInclude Include="framebuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="control.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="car.png">
@@ -182,6 +194,48 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="grass.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_test.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_grass.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\..\..\Downloads\normal_log.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_tree.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_flat.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_road.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="water.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_water.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_tunnel.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Model\Texture\streetlight.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="noise.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="chicken.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_chicken.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="normal_car.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -234,6 +288,24 @@
     <Object Include="grass.obj">
       <Filter>모델 파일</Filter>
     </Object>
+    <Object Include="grass1.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="grass2.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="grass3.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="streetlight.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="chicken.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
+    <Object Include="grass9.obj">
+      <Filter>모델 파일</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <None Include="framepass_f.glsl">
@@ -276,6 +348,27 @@
       <Filter>셰이더 파일</Filter>
     </None>
     <None Include="fog_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="hide_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="hide_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="phong_g.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="ssao_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="ssao_v.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="blur_f.glsl">
+      <Filter>셰이더 파일</Filter>
+    </None>
+    <None Include="blur_v.glsl">
       <Filter>셰이더 파일</Filter>
     </None>
   </ItemGroup>

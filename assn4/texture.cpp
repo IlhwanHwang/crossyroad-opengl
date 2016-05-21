@@ -3,6 +3,8 @@
 // texture management unit
 //
 
+#include <GL/glew.h>
+
 #include "texture.h"
 #include "lodepng.h"
 #include <vector>
@@ -10,7 +12,9 @@
 
 using namespace std;
 
-void Texture::load(const char* fn) {
+void Texture::load(const char* fn, GLenum type) {
+	this->type = type;
+
 	vector<unsigned char> png;
 	vector<unsigned char> image;
 	unsigned error;
@@ -35,11 +39,15 @@ void Texture::load(const char* fn) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
 
 	cout << "Texture: " << fn << " is successfully loaded" << endl;
 }
 
 void Texture::bind() {
+	glActiveTexture(type);
+	glBindTexture(GL_TEXTURE_2D, buf);
+}
+
+void Texture::nbind() {
 	glBindTexture(GL_TEXTURE_2D, buf);
 }
