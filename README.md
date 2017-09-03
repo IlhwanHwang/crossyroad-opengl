@@ -20,6 +20,8 @@ crossyroad-opengl
 
 # File structure
 
+report.docx - 프로그램 설계 구조와 데모 사진 등 이 프로젝트에 대한 자세한 설명이 적혀있는 리포트이다.
+
 assn4.sln - 프로그램 솔루션 파일이다. 이 파일을 이용해 프로젝트를 열면 된다.
 
 .gitattributes.txt
