@@ -1,36 +1,29 @@
-//
-// 버스는서로태워야제맛
-// BetterCarryingEachOther
-// Assignment #4
-// 
+crossyroad-opengl
+=============
+# Notice
 
-*프로그램 개요
-본 프로그램은 CSED451 제4번 과제이다.
-프로그램은 기본적으로 게임이며, 플레이어는 W,A,D를 이용해 캐릭터를 조종하여 장애물을 피해 가장 멀리까지 가면 된다.
-Q를 누르면 시점을 바꿀 수 있고 R을 누르면 재시작 할 수 있다.
-숫자 1번을 누르면 flat shading, gouraud shading, phong shading, wireframe shading를 각각 바꿔 볼 수 있다.
-숫자 2번을 누르면 낮/밤을 바꿔 광원을 성질을 바꾸어 볼 수 있다.
-숫자 3번을 누르면 SSAO기능을 켜고 끌 수 있다.
+본 프로젝트는 포항공과대학교 2016년 봄학기 컴퓨터그래픽스(CSED451) 과제로 제작되었다.
 
-*개발환경
-본 프로젝트는 다음과 같은 환경에서 작성되었다.
-	- Visual Studio 2015
-	- freeglut 2.8.1-1
-	- GLEW 2.0
+# Introduction
 
-*실행방법
-프로그램 솔루션 파일을 VS 2015로 열어서 실행하면 된다.
+플레이어는 W,A,D를 이용해 캐릭터를 조종하여 장애물을 피해 가장 멀리까지 가면 된다. Q를 누르면 시점을 바꿀 수 있고 R을 누르면 재시작 할 수 있다. 숫자 1번을 누르면 flat shading, gouraud shading, phong shading, wireframe shading를 각각 바꿔 볼 수 있다. 숫자 2번을 누르면 낮/밤을 바꿔 광원을 성질을 바꾸어 볼 수 있다. 숫자 3번을 누르면 SSAO기능을 켜고 끌 수 있다.
 
-*파일설명
+# Dependencies
+
+	Visual Studio 2015
+	freeglut 3.0.0
+	GLEW 2.1.0
+
+# How to use
+
+프로그램 솔루션 파일 assn4.sln을 열어서 실행하면 된다.
+
+# File structure
 
 assn4.sln - 프로그램 솔루션 파일이다. 이 파일을 이용해 프로젝트를 열면 된다.
 
 .gitattributes.txt
 .gitignore.txt - VS에서 Git 기능을 이용하면서 생긴 파일이다.
-
-"assn4" 폴더
-
-*소스파일
 
 control.h
 control.cpp - 잡다한 프로그램 컨트롤을 도맡는 소스파일이다.
@@ -101,8 +94,6 @@ vec.h - 벡터와 벡터의 연산이 정의된 소스이다.
 view.h
 view.cpp - 카메라와 관련된 기능이 들어있는 모듈이다.
 
-*셰이더 파일
-
 셰이더 파일은 _v.glsl, _f.glsl, _g.glsl로 끝나는 이름을 가진다. 각각은 vertex shader, fragment shader, geometry shader를 의미한다.
 
 flat_* - flat shading 프로그램
@@ -113,8 +104,6 @@ hide_* - hide shading 프로그램, wireframe shading을 할 때에 hidden line removal�
 ssao_* - SSAO 프로그램
 blur_* - 정사각형 흐림효과 프로그램
 framepass_* - 단순 pass through 프로그램
-
-*리소스 파일
 
 *.obj - 3D 모델 파일이다.
 *.png - 텍스처 파일이다.
